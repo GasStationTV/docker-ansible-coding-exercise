@@ -1,6 +1,6 @@
 # GSTV Docker/Ansible Coding Exercise
 ## Overview
-We are asking you to build out an architecture to support a sample application
+We are asking you to build out an architecture to support multiple instances of a load-balanced sample application
 
 ## Submitting Your Work
 Please fork our repository and use a feature branch workflow while developing your functionality. When you are ready to submit your work make a [pull request against our repository](https://help.github.com/articles/using-pull-requests/).
