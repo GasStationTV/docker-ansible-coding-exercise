@@ -23,6 +23,18 @@ We ask that you use the same technology that we use on a daily basis. This inclu
 - Docker
 - HAProxy
 
+## Notes
+- The `cheese app` is a node application and runs using the 'npm start' command.
+- The `cheese app` defaults to port 3001 (but can take in the env variable PORT)
+- Doing a curl or http GET request to the service should return JSON
+
+```js
+{   
+    "message":"I like to eat cheese",
+    "port":"3001"
+}
+```
+
 ## Submitting Your Work
 Please fork our repository and use a feature branch workflow while developing your functionality. When you are ready to submit your work make a [pull request against our repository](https://help.github.com/articles/using-pull-requests/).
 
