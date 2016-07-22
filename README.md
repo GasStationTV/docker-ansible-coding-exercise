@@ -2,6 +2,12 @@
 ## Overview
 We are asking you to build out an architecture to support multiple instances of a load-balanced sample application
 
+## Technology
+We ask that you use the same technology that we use on a daily basis. This includes
+- Ansible
+- Docker
+- HAProxy
+
 ## Submitting Your Work
 Please fork our repository and use a feature branch workflow while developing your functionality. When you are ready to submit your work make a [pull request against our repository](https://help.github.com/articles/using-pull-requests/).
 
