@@ -3,7 +3,7 @@
 We are asking you to build out an architecture to support multiple instances of a load-balanced sample application
 
 ### Architecture Diagram
-Using a drawing tool of your choice - we use draw.io because it is sharable - create a diagram outlining your approach for creating an environment utilizing Ansible, Docker, and HAProxy. Show how you would use Ansible to provision Docker, deploy multiple Docker containers, and load balance multiple instances of a service using HAProxy. 
+Using a drawing tool of your choice - we use [draw.io](https://www.draw.io/) because it is sharable - create a diagram outlining your approach for creating an environment utilizing Ansible, Docker, and HAProxy. Show how you would use Ansible to provision Docker, deploy multiple Docker containers, and load balance multiple instances of a service using HAProxy. 
 
 _Some questions to consider_
 - How will you scale the service?
