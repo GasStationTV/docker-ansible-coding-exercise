@@ -17,12 +17,6 @@ _You should_
 - Create the HAProxy configuration to handle the load balancing.
 - Create the dockerfile to build the image for the service.
 
-## Technology
-We ask that you use the same technology that we use on a daily basis. This includes
-- Ansible
-- Docker
-- HAProxy
-
 ## Notes
 - The `cheese app` is a node application and runs using the 'npm start' command.
 - The `cheese app` defaults to port 3001 (but can take in the env variable PORT)
@@ -34,6 +28,12 @@ We ask that you use the same technology that we use on a daily basis. This inclu
     "port":"3001"
 }
 ```
+
+## Technology
+We ask that you use the same technology that we use on a daily basis. This includes
+- Ansible
+- Docker
+- HAProxy
 
 ## Submitting Your Work
 Please fork our repository and use a feature branch workflow while developing your functionality. When you are ready to submit your work make a [pull request against our repository](https://help.github.com/articles/using-pull-requests/).
