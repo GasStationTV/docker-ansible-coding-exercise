@@ -1,2 +1,15 @@
 */node_modules/*
 .idea/*
+
+# ansible
+*.retry
+
+# terraform
+**/*.tfstate*
+**/.terraform
+
+# account files
+account.json
+
+# Stupid osx files
+.DS_Store
