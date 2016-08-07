@@ -1,0 +1,34 @@
+---
+# tasks file for docker_apps
+
+- name: Ensure Dockerfile directory exists
+  file:
+    path: /home/centos/cheese
+    state: directory
+  tags: apps
+
+- name: Push app files
+  copy:
+    src: "{{ item }}"
+    dest: /home/centos/cheese/
+  with_items:
+    - Dockerfile
+    - package.json
+    - server.js
+  tags: apps
+
+- name: Build Image
+  docker_image:
+    path: /home/centos/cheese
+    name: "cheese-v2"
+    state: present
+  tags: apps
+
+- name: Start container
+  docker:
+    image: cheese-v2
+    state: started
+    command: npm start
+    count: 5
+    publish_all_ports: true
+  tags: apps

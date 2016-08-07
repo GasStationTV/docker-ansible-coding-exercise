@@ -1,0 +1,19 @@
+---
+# tasks file for docker
+
+- name: Add repository
+  yum_repository:
+    name: DockerRepo
+    description: Official docker repository
+    baseurl: https://yum.dockerproject.org/repo/main/centos/7/
+    gpgkey: https://yum.dockerproject.org/gpg
+    gpgcheck: yes
+
+- name: Install docker and dependencies
+  yum: name={{ item }} state=latest
+  with_items:
+    - docker-engine
+    - python-docker-py
+
+- name: Start docker
+  service: name=docker state=started enabled=yes
