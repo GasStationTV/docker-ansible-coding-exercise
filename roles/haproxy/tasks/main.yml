@@ -1,0 +1,12 @@
+---
+# tasks file for haproxy
+
+- name: Install haproxy
+  yum: name=haproxy state=latest
+  tags: haproxy
+
+- name: Configure backends
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+  tags: haproxy

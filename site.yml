@@ -1,7 +1,10 @@
 ---
-# - hosts: all
-#   become: true
-#
+- hosts: all
+  become: true
+
+  roles:
+    - common
+
 
 - hosts: role=docker
   become: true
@@ -9,3 +12,10 @@
   roles:
     - docker
     - docker_apps
+
+
+- hosts: role=haproxy
+  become: true
+
+  roles:
+    - haproxy
