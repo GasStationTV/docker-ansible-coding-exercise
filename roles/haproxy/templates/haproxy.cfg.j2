@@ -41,6 +41,6 @@ backend app
    {% for item in groups['role=docker'] %} server      {{ item }} {% if hostvars[item].public_ipv4 is defined %} {{ hostvars[item].public_ipv4 }}:9001 check
    {% endif %}
 {% endfor %}
-#{% for item in groups['role=docker'] %} server      {{ item }} {% if hostvars[item].public_ipv4 is defined %} {{ hostvars[item].public_ipv4 }}:9002 check
-#   {% endif %}
-#{% endfor %}
+{% for item in groups['role=docker'] %} server      {{ item }} {% if hostvars[item].public_ipv4 is defined %} {{ hostvars[item].public_ipv4 }}:9002 check
+   {% endif %}
+{% endfor %}
