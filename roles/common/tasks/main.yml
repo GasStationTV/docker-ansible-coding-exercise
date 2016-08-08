@@ -6,5 +6,27 @@
     src: hosts.j2
     dest: /etc/hosts
     mode: 0644
-  tags:
-    - common
+  tags: common
+
+- name: Disable selinux
+  template:
+    src: selinux.j2
+    dest: /etc/sysconfig/selinux
+  tags: common
+
+- name: reboot host
+  shell: nohup bash -c "sleep 2s && reboot" &
+  register: reboot
+  tags: common
+
+- name: wait for host boot
+  become: false
+  local_action:
+    module: wait_for
+    host: "{{ ansible_ssh_host }}"
+    port: 22
+    delay: "{{ boot_wait | default(60) }}"
+    timeout: 120
+    state: started
+  when: reboot.changed
+  tags: common

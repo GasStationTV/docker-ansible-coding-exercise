@@ -10,3 +10,7 @@
     src: haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
   tags: haproxy
+
+- name: Start haproxy at boot and reload
+  service: name=haproxy state=restarted enabled=yes
+  tags: haproxy

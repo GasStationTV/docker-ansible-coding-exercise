@@ -29,6 +29,9 @@
     image: cheese-v2
     state: started
     command: npm start
-    count: 5
-    publish_all_ports: true
+    # count: 2
+    ports: 0.0.0.0:{{ item }}:3001
+  with_items:
+    - 9001
+    - 9002
   tags: apps
