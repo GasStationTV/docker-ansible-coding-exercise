@@ -9,5 +9,6 @@ WORKDIR /
 ADD     . ${WORKDIR}
 RUN     npm install --progress=false --log-level=info
 
+EXPOSE 3001
 
 CMD     ["npm", "start"]

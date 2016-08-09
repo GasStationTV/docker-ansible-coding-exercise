@@ -1,0 +1,39 @@
+---
+- hosts:  all
+  gather_facts: no
+  become: true
+
+  tasks:
+
+  - name: clean yum
+    command: yum clean all
+
+  - name: refresh yum cache
+    command: yum makecache
+
+  - name: upgrade kernel package
+    yum:
+      name: kernel
+      state: latest
+    register: kernel
+
+  - name: upgrade all packages
+    yum:
+      name: "*"
+      state: latest
+
+  - name: reboot host
+    shell: nohup bash -c "sleep 2s && reboot" &
+    register: reboot
+    when: kernel.changed
+
+  - name: wait for host boot
+    become: false
+    local_action:
+      module: wait_for
+      host: "{{ ansible_ssh_host }}"
+      port: 22
+      delay: "{{ boot_wait | default(60) }}"
+      timeout: 120
+      state: started
+    when: reboot.changed

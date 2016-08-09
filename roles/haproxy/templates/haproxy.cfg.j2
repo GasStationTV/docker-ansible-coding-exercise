@@ -1,0 +1,46 @@
+#---------------------------------------------------------------------
+# Global settings
+#---------------------------------------------------------------------
+global
+    log         127.0.0.1 local2 debug    #Log configuration
+    chroot      /var/lib/haproxy
+    pidfile     /var/run/haproxy.pid
+    maxconn     4000
+    daemon
+
+    # turn on stats unix socket
+    stats socket /var/lib/haproxy/stats
+
+#---------------------------------------------------------------------
+# common defaults that all the 'listen' and 'backend' sections will
+# use if not designated in their block
+#---------------------------------------------------------------------
+defaults
+        log global
+        mode http
+        option httplog
+        option dontlognull
+        option httpclose
+        option forwardfor
+        timeout connect 5000
+        timeout client  50000
+        timeout server  50000
+
+#---------------------------------------------------------------------
+# main frontend which proxys to the backends
+#---------------------------------------------------------------------
+
+frontend http-in
+    bind *:80
+    default_backend app
+
+#---------------------------------------------------------------------
+# round robin balancing between the various backends
+#---------------------------------------------------------------------
+backend app
+   {% for item in groups['role=docker'] %} server      {{ item }} {% if hostvars[item].public_ipv4 is defined %} {{ hostvars[item].public_ipv4 }}:9001 check
+   {% endif %}
+{% endfor %}
+{% for item in groups['role=docker'] %} server      {{ item }} {% if hostvars[item].public_ipv4 is defined %} {{ hostvars[item].public_ipv4 }}:9002 check
+   {% endif %}
+{% endfor %}
