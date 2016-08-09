@@ -24,6 +24,7 @@
   with_items:
     - apt-transport-https
     - ca-certificates
+    - python-pip
   when: ansible_os_family == "Debian"
   tags: docker
 

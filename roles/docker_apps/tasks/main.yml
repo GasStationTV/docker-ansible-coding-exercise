@@ -5,6 +5,14 @@
   file:
     path: /home/centos/cheese
     state: directory
+  when: ansible_os_family == "EL"
+  tags: apps
+
+- name: Ensure Dockerfile directory exists
+  file:
+    path: /home/ubuntu/cheese
+    state: directory
+  when: ansible_os_family == "Debian"
   tags: apps
 
 - name: Push app files
@@ -15,6 +23,23 @@
     - Dockerfile
     - package.json
     - server.js
+  when: ansible_os_family == "EL"
+  tags: apps
+
+- name: Push app files
+  copy:
+    src: "{{ item }}"
+    dest: /home/ubuntu/cheese/
+  with_items:
+    - Dockerfile
+    - package.json
+    - server.js
+  when: ansible_os_family == "Debian"
+  tags: apps
+
+- name: Install docker-py via pip
+  pip: name=docker-py
+  when: ansible_os_family == "Debian"
   tags: apps
 
 - name: Build Image
@@ -22,8 +47,16 @@
     path: /home/centos/cheese
     name: "cheese-v2"
     state: present
+  when: ansible_os_family == "EL"
   tags: apps
 
+- name: Build Image
+  docker_image:
+    path: /home/ubuntu/cheese
+    name: "cheese-v2"
+    state: present
+  when: ansible_os_family == "Debian"
+  tags: apps
 
 # Currently with_items causes an error, which we ignore as the result is correct
 # Adding additional ports + count will result in adding more containers
